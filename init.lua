@@ -25,6 +25,7 @@ langton_ant.register_new_ant = function(player)
 	player:setpos(pos)
 	player:setyaw(yaw)
 
+	print("registering")
 	langton_ant.ants[player:get_player_name()] = {direction = {x=0,y=1,z=0,yaw=0}, player = player}
 end
 
@@ -46,7 +47,25 @@ langton_ant.update_block = function(node_pos, name)
 	end
 end
 
+langton_ant.turn_ant = function(dir)
+
+	if name ~= langton_ant.white.name then
+		dir.yaw = langton_ant.turn_right(dir.yaw)
+	else
+		dir.yaw = langton_ant.turn_left(dir.yaw)
+	end
+end
+
+
+
 langton_ant.update_ant = function(ant)
+	-- if not ant.player then
+		-- print("Player is null")
+		-- return
+	-- else 
+		-- print("Got a player")
+	-- end
+	
 	local pos = ant.player:getpos()
 	local node_pos = pos
 
@@ -56,14 +75,9 @@ langton_ant.update_ant = function(ant)
 	local dir = ant.direction
 	local name = node.name
 
-	langton_ant.update_ant(node_pos, name)
-
-	if name ~= langton_ant.white.name then
-		dir.yaw = langton_ant.turn_right(dir.yaw)
-	else
-		dir.yaw = langton_ant.turn_left(dir.yaw)
-	end
-
+	langton_ant.update_block(node_pos, name)
+	langton_ant.turn_ant(dir)
+	
 	dir.x = math.cos(dir.yaw)
 	dir.z = math.sin(dir.yaw)
 
