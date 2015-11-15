@@ -37,7 +37,8 @@ langton_ant.turn_left = function(yaw)
 end
 
 
-langton_ant.update_block = function(node)
+langton_ant.update_block = function(node_pos, name)
+	
 	if name ~= langton_ant.white.name then
 		minetest.set_node(node_pos,langton_ant.white)
 	else
@@ -52,10 +53,10 @@ langton_ant.update_ant = function(ant)
 	node_pos.y = node_pos.y - 1
 
 	local node = minetest.get_node(node_pos)
-	local name = node.name
 	local dir = ant.direction
+	local name = node.name
 
-	langton_ant.update_ant(node)
+	langton_ant.update_ant(node_pos, name)
 
 	if name ~= langton_ant.white.name then
 		dir.yaw = langton_ant.turn_right(dir.yaw)
