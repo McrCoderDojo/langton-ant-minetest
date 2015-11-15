@@ -28,6 +28,14 @@ langton_ant.register_new_ant = function(player)
 	langton_ant.ants[player:get_player_name()] = {direction = {x=0,y=1,z=0,yaw=0}, player = player}
 end
 
+langton_ant.update_block = function(node)
+	if name ~= langton_ant.white.name then
+		minetest.set_node(node_pos,langton_ant.white)
+	else
+		minetest.set_node(node_pos,langton_ant.black)
+	end
+end
+
 langton_ant.update_ant = function(ant)
 	local pos = ant.player:getpos()
 	local node_pos = pos
@@ -38,11 +46,11 @@ langton_ant.update_ant = function(ant)
 	local name = node.name
 	local dir = ant.direction
 
+	langton_ant.update_ant(node)
+
 	if name ~= langton_ant.white.name then
-		minetest.set_node(node_pos,langton_ant.white)
 		dir.yaw = dir.yaw - math.pi/2
 	else
-		minetest.set_node(node_pos,langton_ant.black)
 		dir.yaw = dir.yaw + math.pi/2
 	end
 
