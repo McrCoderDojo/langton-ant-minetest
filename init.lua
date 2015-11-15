@@ -8,7 +8,7 @@ langton_ant.white = {name = "wool:white"}
 langton_ant.black = {name = "wool:black"}
 
 langton_ant.timer = 0
-langton_ant.step_timer = 0.05
+langton_ant.step_timer = 0.2
 
 langton_ant.ants = {}
 
