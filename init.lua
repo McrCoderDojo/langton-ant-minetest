@@ -29,12 +29,12 @@ langton_ant.register_new_ant = function(player)
 	langton_ant.ants[player:get_player_name()] = {direction = {x=0,y=1,z=0,yaw=0}, player = player}
 end
 
-langton_ant.turn_right = function(yaw)
-	return yaw - math.pi/2
+langton_ant.turn_right = function(dir)
+	dir.yaw = dir.yaw - math.pi/2
 end
 
-langton_ant.turn_left = function(yaw)
-	return yaw + math.pi/2
+langton_ant.turn_left = function(dir)
+	dir.yaw = dir.yaw + math.pi/2
 end
 
 
